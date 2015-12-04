@@ -1,0 +1,4 @@
+export DATABASE_URL=postgres://postgres:password@127.0.0.1:5432/apigiftline_db
+export DJANGO_DEBUG=True
+export DJANGO_SECRET_KEY=CHANGEME!!!
+
