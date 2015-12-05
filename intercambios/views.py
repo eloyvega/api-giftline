@@ -1,7 +1,10 @@
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets, authentication, permissions
 
 from .models import Intercambio
-from .serializers import IntercambioSerializer
+from .serializers import IntercambioSerializer, UserSerializer
+
+User = get_user_model()
 
 
 class ConfigMixin(object):
@@ -20,3 +23,10 @@ class ConfigMixin(object):
 class IntercambioViewSet(ConfigMixin, viewsets.ModelViewSet):
     queryset = Intercambio.objects.order_by('fecha_creacion')
     serializer_class = IntercambioSerializer
+
+
+class UserViewSet(ConfigMixin, viewsets.ReadOnlyModelViewSet):
+    lookup_field = User.USERNAME_FIELD
+    lookup_url_kwarg = User.USERNAME_FIELD
+    queryset = User.objects.order_by(User.USERNAME_FIELD)
+    serializer_class = UserSerializer
